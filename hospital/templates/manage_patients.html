@@ -1,0 +1,58 @@
+{% extends 'navigationbar.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container my-5" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+  <h2 class="text-center text-warning mb-4" style="font-size: 2.2rem;">
+    📋 Manage Appointments
+  </h2>
+
+  {% if appointments %}
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover shadow-sm">
+      <thead class="table-warning text-center">
+        <tr>
+          <th>#</th>
+          <th>Patient</th>
+          <th>Doctor</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for appointment in appointments %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ appointment.patient.name }}</td>
+          <td>{{ appointment.doctor.name }}</td>
+          <td>{{ appointment.date|date:"d M Y" }}</td>
+          <td>{{ appointment.time|time:"H:i" }}</td>
+          <td>
+            {% if appointment.status == 'Pending' %}
+              <span class="badge bg-warning text-dark">Pending</span>
+            {% elif appointment.status == 'Confirmed' %}
+              <span class="badge bg-success">Confirmed</span>
+            {% elif appointment.status == 'Cancelled' %}
+              <span class="badge bg-danger">Cancelled</span>
+            {% endif %}
+          </td>
+          <td class="text-center">
+            <a href="{% url 'confirm_appointment' appointment.id %}" class="btn btn-sm btn-success mb-1">✔ Confirm</a>
+            <a href="{% url 'cancel_appointment' appointment.id %}" class="btn btn-sm btn-danger">✖ Cancel</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="alert alert-info text-center">
+    No appointments available.
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

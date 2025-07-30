@@ -1,0 +1,47 @@
+{% extends 'navigationbar.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container my-5" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+  <h2 class="text-center text-success mb-4" style="font-size: 2.2rem;">
+    🧑‍🤝‍🧑 View All Patients
+  </h2>
+
+  {% if patients %}
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover shadow-sm">
+      <thead class="table-success text-center">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Contact</th>
+          <th scope="col">Address</th>
+          <th scope="col">Date Registered</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for patient in patients %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ patient.name }}</td>
+          <td>{{ patient.email }}</td>
+          <td>{{ patient.gender }}</td>
+          <td>{{ patient.contact }}</td>
+          <td>{{ patient.address }}</td>
+          <td>{{ patient.created_at|date:"d M Y" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="alert alert-warning text-center">
+    ❗ No patients found.
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'navigationbar.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container my-5" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <h2 class="text-center text-success mb-4">📋 Manage Appointments</h2>
+
+  {% if appointments %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped bg-white shadow-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th>#</th>
+            <th>👤 Patient Name</th>
+            <th>👨‍⚕️ Doctor</th>
+            <th>📅 Date</th>
+            <th>🕒 Time</th>
+            <th>📝 Status</th>
+            <!-- Optional action column -->
+            <th>❌ Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appointment in appointments %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ appointment.patient.name }}</td>
+              <td>{{ appointment.doctor.name }}</td>
+              <td>{{ appointment.date }}</td>
+              <td>{{ appointment.time }}</td>
+              <td>{{ appointment.status }}</td>
+              <td>
+                <!-- You can implement cancel/delete later -->
+                <form method="POST" action="{% url 'cancel_appointment' appointment.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-info text-center">No appointments available.</div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'navigationbar.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container mt-5 mb-5">
+
+  <!-- Hospital Info (Top Section) -->
+  <div class="text-center mb-4">
+    <h2 class="text-primary font-weight-bold">📞 Contact Information</h2>
+    <p>
+      <strong>🏥 Address:</strong> XYZ Hospital, Sector 12, New Delhi, India<br>
+      <strong>📧 Email:</strong> support@xyzhospital.com<br>
+      <strong>📱 Phone:</strong> +91-98765-43210<br>
+      <strong>🕐 Hours:</strong> Mon–Sat, 9 AM – 6 PM
+    </p>
+    <hr style="border: 1px solid #007bff; width: 60%;">
+  </div>
+
+  <!-- Success Message -->
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success text-center">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Contact Form -->
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-primary">
+        <div class="card-header bg-primary text-white text-center">
+          <h4 class="mb-0">✉️ Send Us a Message</h4>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" name="name" class="form-control" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" name="email" class="form-control" placeholder="example@email.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="mobile">Mobile Number</label>
+              <input type="text" name="mobile" class="form-control" placeholder="10-digit phone number" required>
+            </div>
+
+            <div class="form-group">
+              <label for="msg">Your Message</label>
+              <textarea name="msg" class="form-control" rows="4" placeholder="Type your message..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block font-weight-bold">🚀 Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

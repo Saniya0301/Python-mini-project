@@ -1,0 +1,58 @@
+{% extends 'navigationbar.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container my-5" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+  <h2 class="text-center text-primary mb-4" style="font-size: 2.2rem;">
+    🛠️ Admin Dashboard
+  </h2>
+
+  <!-- Welcome Message -->
+  <div class="alert alert-info text-center" role="alert">
+    👋 Welcome back, <strong>{{ request.user.username|default:"Admin" }}</strong>! Manage hospital operations from this control panel.
+  </div>
+
+  <!-- Admin Stats -->
+  <div class="row text-center mt-4">
+    <div class="col-md-4 mb-4">
+      <div class="card border-primary shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">👨‍⚕️ Total Doctors</h5>
+          <p class="display-4 fw-bold text-primary">{{ total_doctors|default:"0" }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card border-success shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">🧑‍🤝‍🧑 Total Patients</h5>
+          <p class="display-4 fw-bold text-success">{{ total_patients|default:"0" }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card border-warning shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">📅 Appointments</h5>
+          <p class="display-4 fw-bold text-warning">{{ total_appointments|default:"0" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Action Buttons -->
+  <div class="text-center mt-5">
+    <a href="{% url 'add_doctor' %}" class="btn btn-outline-primary btn-lg mx-2">
+      ➕ Add Doctor
+    </a>
+    <a href="{% url 'view_patients' %}" class="btn btn-outline-success btn-lg mx-2">
+      📝 View Patients
+    </a>
+    <a href="{% url 'manage_appointments' %}" class="btn btn-outline-warning btn-lg mx-2">
+      📋 Manage Appointments
+    </a>
+  </div>
+
+</div>
+{% endblock %}

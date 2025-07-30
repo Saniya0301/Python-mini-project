@@ -1,0 +1,58 @@
+{% extends 'navigationbar.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container my-5" style="max-width: 700px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+  <h2 class="text-center text-primary mb-4">➕ Add New Doctor</h2>
+
+  <!-- Success/Error Messages -->
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Doctor Form -->
+  <form method="POST" enctype="multipart/form-data" class="border p-4 rounded shadow-sm bg-light">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="name" class="form-label">👨‍⚕️ Full Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Dr. John Doe" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">📧 Email</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="doctor@example.com" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">📱 Phone Number</label>
+      <input type="tel" class="form-control" id="phone" name="phone" placeholder="e.g. +91-9876543210" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="specialization" class="form-label">🏷️ Specialization</label>
+      <input type="text" class="form-control" id="specialization" name="specialization" placeholder="Cardiologist, Dermatologist..." required>
+    </div>
+
+    <div class="mb-3">
+      <label for="experience" class="form-label">📆 Experience (Years)</label>
+      <input type="number" class="form-control" id="experience" name="experience" min="0" max="50" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="photo" class="form-label">🖼️ Upload Profile Photo</label>
+      <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary btn-lg">✅ Add Doctor</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

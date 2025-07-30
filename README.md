@@ -6,6 +6,7 @@ A comprehensive **Hospital Management System (HMS)** designed to digitize and st
 > 📌 Designed with a focus on scalability, maintainability, and ease-of-use for both staff and administrators.
 
 ---
+full working vid is provided in hmvid.mp4
 
 ## 📚 Table of Contents
 
